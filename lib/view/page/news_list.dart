@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practicehome/view/components/category_chips.dart';
 import 'package:practicehome/view/components/search.dart';
 
 class NewsList extends StatelessWidget {
@@ -21,7 +22,11 @@ class NewsList extends StatelessWidget {
                 onSearch:(keyword){
                 getNews(context, keyword);
               },),
-              // CategoryChips(),
+              CategoryChips(
+                onCategoryChanged: (category){
+                  getCategoryNews(context, category);
+                },
+              ),
               Expanded(
                   child: Center(
                       child: CircularProgressIndicator())),
@@ -38,5 +43,9 @@ class NewsList extends StatelessWidget {
 
   void getNews(context, keyword) {
     print('$keyword が渡された');
+  }
+
+  void getCategoryNews(BuildContext context, category) {
+    print(category.nameJp);
   }
 }
