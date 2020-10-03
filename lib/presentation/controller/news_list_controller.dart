@@ -7,7 +7,7 @@ import 'package:state_notifier/state_notifier.dart';
 part 'news_list_controller.freezed.dart';
 
 @freezed
-abstract class NewsListPageState with _$NewsListPageState{
+abstract class NewsListPageState with _$NewsListPageState {
   factory NewsListPageState({
     CategoryListData category,
     SearchType searchType,
@@ -16,14 +16,18 @@ abstract class NewsListPageState with _$NewsListPageState{
   }) = _NewsListPageState;
 }
 
-class NewsListPageController extends StateNotifier<NewsListPageState>{
-  NewsListPageController() : super(NewsListPageState(loading: false));
+class NewsListPageController extends StateNotifier<NewsListPageState> {
+  NewsListPageController() : super(NewsListPageState(category: categories[0], searchType: SearchType.CATEGORY ,loading: false));
 
-  void initState(){
-    print('initState');
-    state = state.copyWith(
-      category: categories[0],
-      searchType: SearchType.CATEGORY,
-    );
+
+  void getNews({@required SearchType searchType, CategoryListData category, String keyword})
+  {
+    state = state.copyWith(searchType: searchType, category: category, keyword: keyword);
+    if (state.keyword != null){
+      print('カテゴリー:' + state.category.nameJp + 'キーワード'+state.keyword + state.searchType.toString());
+    }else{
+      print('カテゴリー:' + state.category.nameJp + state.searchType.toString());
+    }
+
   }
 }

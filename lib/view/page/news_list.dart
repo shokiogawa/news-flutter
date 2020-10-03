@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:practicehome/data/category_list_data.dart';
+import 'package:practicehome/data/search_type.dart';
+import 'package:practicehome/presentation/controller/news_list_controller.dart';
 import 'package:practicehome/view/components/category_chips.dart';
 import 'package:practicehome/view/components/search.dart';
+import 'package:provider/provider.dart';
 
 class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<NewsListPageController>(context, listen: false);
+    final state = Provider.of<NewsListPageState>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
           tooltip: "更新",
-          onPressed: (){
-            onRefresh(context);
+          onPressed: () {
+            // onRefresh(context);
+            controller.getNews(
+                searchType: state.searchType,
+                category: state.category,
+                keyword: state.keyword);
           },
         ),
         body: Padding(
@@ -19,17 +29,24 @@ class NewsList extends StatelessWidget {
           child: Column(
             children: [
               SearchBar(
-                onSearch:(keyword){
-                getNews(context, keyword);
-              },),
-              CategoryChips(
-                onCategoryChanged: (category){
-                  getCategoryNews(context, category);
+                onSearch: (keyword) {
+                  controller.getNews(
+                      searchType: SearchType.KEYWORD,
+                      keyword: keyword,
+                      category: categories[0]);
                 },
               ),
-              Expanded(
-                  child: Center(
-                      child: CircularProgressIndicator())),
+              CategoryChips(
+                onCategoryChanged: (category) {
+                  controller.getNews(
+                      searchType: SearchType.CATEGORY, category: category);
+                  // getCategoryNews(context, category);
+                },
+              ),
+              Container(
+                child: Text(state.category.nameJp),
+              ),
+              Expanded(child: Center(child: CircularProgressIndicator())),
             ],
           ),
         ),
