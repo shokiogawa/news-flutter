@@ -18,12 +18,14 @@ class _$NewsListPageStateTearOff {
       {CategoryListData category,
       SearchType searchType,
       String keyword,
-      bool loading}) {
+      bool loading,
+      List<Articles> articles}) {
     return _NewsListPageState(
       category: category,
       searchType: searchType,
       keyword: keyword,
       loading: loading,
+      articles: articles,
     );
   }
 }
@@ -38,6 +40,7 @@ mixin _$NewsListPageState {
   SearchType get searchType;
   String get keyword;
   bool get loading;
+  List<Articles> get articles;
 
   $NewsListPageStateCopyWith<NewsListPageState> get copyWith;
 }
@@ -51,7 +54,8 @@ abstract class $NewsListPageStateCopyWith<$Res> {
       {CategoryListData category,
       SearchType searchType,
       String keyword,
-      bool loading});
+      bool loading,
+      List<Articles> articles});
 }
 
 /// @nodoc
@@ -69,6 +73,7 @@ class _$NewsListPageStateCopyWithImpl<$Res>
     Object searchType = freezed,
     Object keyword = freezed,
     Object loading = freezed,
+    Object articles = freezed,
   }) {
     return _then(_value.copyWith(
       category:
@@ -77,6 +82,8 @@ class _$NewsListPageStateCopyWithImpl<$Res>
           searchType == freezed ? _value.searchType : searchType as SearchType,
       keyword: keyword == freezed ? _value.keyword : keyword as String,
       loading: loading == freezed ? _value.loading : loading as bool,
+      articles:
+          articles == freezed ? _value.articles : articles as List<Articles>,
     ));
   }
 }
@@ -92,7 +99,8 @@ abstract class _$NewsListPageStateCopyWith<$Res>
       {CategoryListData category,
       SearchType searchType,
       String keyword,
-      bool loading});
+      bool loading,
+      List<Articles> articles});
 }
 
 /// @nodoc
@@ -112,6 +120,7 @@ class __$NewsListPageStateCopyWithImpl<$Res>
     Object searchType = freezed,
     Object keyword = freezed,
     Object loading = freezed,
+    Object articles = freezed,
   }) {
     return _then(_NewsListPageState(
       category:
@@ -120,6 +129,8 @@ class __$NewsListPageStateCopyWithImpl<$Res>
           searchType == freezed ? _value.searchType : searchType as SearchType,
       keyword: keyword == freezed ? _value.keyword : keyword as String,
       loading: loading == freezed ? _value.loading : loading as bool,
+      articles:
+          articles == freezed ? _value.articles : articles as List<Articles>,
     ));
   }
 }
@@ -127,7 +138,11 @@ class __$NewsListPageStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_NewsListPageState implements _NewsListPageState {
   _$_NewsListPageState(
-      {this.category, this.searchType, this.keyword, this.loading});
+      {this.category,
+      this.searchType,
+      this.keyword,
+      this.loading,
+      this.articles});
 
   @override
   final CategoryListData category;
@@ -137,10 +152,12 @@ class _$_NewsListPageState implements _NewsListPageState {
   final String keyword;
   @override
   final bool loading;
+  @override
+  final List<Articles> articles;
 
   @override
   String toString() {
-    return 'NewsListPageState(category: $category, searchType: $searchType, keyword: $keyword, loading: $loading)';
+    return 'NewsListPageState(category: $category, searchType: $searchType, keyword: $keyword, loading: $loading, articles: $articles)';
   }
 
   @override
@@ -157,7 +174,11 @@ class _$_NewsListPageState implements _NewsListPageState {
                 const DeepCollectionEquality()
                     .equals(other.keyword, keyword)) &&
             (identical(other.loading, loading) ||
-                const DeepCollectionEquality().equals(other.loading, loading)));
+                const DeepCollectionEquality()
+                    .equals(other.loading, loading)) &&
+            (identical(other.articles, articles) ||
+                const DeepCollectionEquality()
+                    .equals(other.articles, articles)));
   }
 
   @override
@@ -166,7 +187,8 @@ class _$_NewsListPageState implements _NewsListPageState {
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(searchType) ^
       const DeepCollectionEquality().hash(keyword) ^
-      const DeepCollectionEquality().hash(loading);
+      const DeepCollectionEquality().hash(loading) ^
+      const DeepCollectionEquality().hash(articles);
 
   @override
   _$NewsListPageStateCopyWith<_NewsListPageState> get copyWith =>
@@ -178,7 +200,8 @@ abstract class _NewsListPageState implements NewsListPageState {
       {CategoryListData category,
       SearchType searchType,
       String keyword,
-      bool loading}) = _$_NewsListPageState;
+      bool loading,
+      List<Articles> articles}) = _$_NewsListPageState;
 
   @override
   CategoryListData get category;
@@ -188,6 +211,8 @@ abstract class _NewsListPageState implements NewsListPageState {
   String get keyword;
   @override
   bool get loading;
+  @override
+  List<Articles> get articles;
   @override
   _$NewsListPageStateCopyWith<_NewsListPageState> get copyWith;
 }

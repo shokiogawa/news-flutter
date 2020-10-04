@@ -9,19 +9,13 @@ import 'package:provider/provider.dart';
 class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<NewsListPageController>(context, listen: false);
-    final state = Provider.of<NewsListPageState>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
           tooltip: "更新",
           onPressed: () {
-            // onRefresh(context);
-            controller.getNews(
-                searchType: state.searchType,
-                category: state.category,
-                keyword: state.keyword);
+            onRefresh(context);
           },
         ),
         body: Padding(
@@ -30,21 +24,16 @@ class NewsList extends StatelessWidget {
             children: [
               SearchBar(
                 onSearch: (keyword) {
-                  controller.getNews(
-                      searchType: SearchType.KEYWORD,
-                      keyword: keyword,
-                      category: categories[0]);
+                  getNews(context, keyword);
                 },
               ),
               CategoryChips(
                 onCategoryChanged: (category) {
-                  controller.getNews(
-                      searchType: SearchType.CATEGORY, category: category);
-                  // getCategoryNews(context, category);
+                  getCategoryNews(context, category);
                 },
               ),
               Container(
-                child: Text(state.category.nameJp),
+                // child: Text(state.category.nameJp),
               ),
               Expanded(child: Center(child: CircularProgressIndicator())),
             ],
@@ -54,15 +43,31 @@ class NewsList extends StatelessWidget {
     );
   }
 
-  void onRefresh(BuildContext context) {
+
+  Future <void> onRefresh(BuildContext context) async{
+    final controller = Provider.of<NewsListPageController>(context, listen: false);
+    final state = Provider.of<NewsListPageState>(context, listen: false);
     print('更新が押された');
+    await controller.getNews(
+        searchType: state.searchType,
+        category: state.category,
+        keyword: state.keyword);
   }
 
-  void getNews(context, keyword) {
+  Future <void> getNews(context, keyword) async{
+    final controller = Provider.of<NewsListPageController>(context, listen: false);
     print('$keyword が渡された');
+    await controller.getNews(
+        searchType: SearchType.KEYWORD,
+        keyword: keyword,
+        category: categories[0]);
   }
 
-  void getCategoryNews(BuildContext context, category) {
+  Future<void> getCategoryNews(BuildContext context, category) async{
+    final controller = Provider.of<NewsListPageController>(context, listen: false);
     print(category.nameJp);
+    await controller.getNews(
+        searchType: SearchType.CATEGORY, category: category);
+
   }
 }
