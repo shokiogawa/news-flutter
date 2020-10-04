@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practicehome/models/model/news_model.dart';
 import 'package:practicehome/presentation/controller/news_list_controller.dart';
+import 'package:practicehome/view/components/article_tile_description.dart';
 import 'package:practicehome/view/components/image_from_url.dart';
 import 'package:provider/provider.dart';
 
@@ -41,13 +42,7 @@ class ArticleTile extends StatelessWidget {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text(articles.title),
-                      Text(articles.publishedAt),
-                      Text(articles.description),
-                    ],
-                  ),
+                  child: ArticleTileDescription(articles: articles,),
                 ),
               )
             ],
