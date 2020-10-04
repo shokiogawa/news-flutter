@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practicehome/data/category_list_data.dart';
 import 'package:practicehome/data/search_type.dart';
 import 'package:practicehome/presentation/controller/news_list_controller.dart';
+import 'package:practicehome/view/components/article_tile.dart';
 import 'package:practicehome/view/components/category_chips.dart';
 import 'package:practicehome/view/components/search.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,13 @@ import 'package:provider/provider.dart';
 class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final controller =
+        Provider.of<NewsListPageController>(context, listen: false);
+    final state = Provider.of<NewsListPageState>(context, listen: true);
+    if (!state.loading && state.articles.isEmpty) {
+      Future(() => controller.getNews(
+          searchType: SearchType.CATEGORY, category: categories[0]));
+    }
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -32,10 +40,16 @@ class NewsList extends StatelessWidget {
                   getCategoryNews(context, category);
                 },
               ),
-              Container(
-                // child: Text(state.category.nameJp),
-              ),
-              Expanded(child: Center(child: CircularProgressIndicator())),
+              Expanded(
+                  child: state.loading
+                      ? Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          itemCount: state.articles.length,
+                          itemBuilder: (context, int index) => ArticleTile(
+                              articles: state.articles[index],
+                              onArticle: (article) {
+                                _openArticleNewPage(article, context);
+                              }))),
             ],
           ),
         ),
@@ -43,9 +57,9 @@ class NewsList extends StatelessWidget {
     );
   }
 
-
-  Future <void> onRefresh(BuildContext context) async{
-    final controller = Provider.of<NewsListPageController>(context, listen: false);
+  Future<void> onRefresh(BuildContext context) async {
+    final controller =
+        Provider.of<NewsListPageController>(context, listen: false);
     final state = Provider.of<NewsListPageState>(context, listen: false);
     print('更新が押された');
     await controller.getNews(
@@ -54,8 +68,9 @@ class NewsList extends StatelessWidget {
         keyword: state.keyword);
   }
 
-  Future <void> getNews(context, keyword) async{
-    final controller = Provider.of<NewsListPageController>(context, listen: false);
+  Future<void> getNews(context, keyword) async {
+    final controller =
+        Provider.of<NewsListPageController>(context, listen: false);
     print('$keyword が渡された');
     await controller.getNews(
         searchType: SearchType.KEYWORD,
@@ -63,11 +78,15 @@ class NewsList extends StatelessWidget {
         category: categories[0]);
   }
 
-  Future<void> getCategoryNews(BuildContext context, category) async{
-    final controller = Provider.of<NewsListPageController>(context, listen: false);
+  Future<void> getCategoryNews(BuildContext context, category) async {
+    final controller =
+        Provider.of<NewsListPageController>(context, listen: false);
     print(category.nameJp);
     await controller.getNews(
         searchType: SearchType.CATEGORY, category: category);
+  }
 
+  void _openArticleNewPage( article, BuildContext context) {
+    print(article.url);
   }
 }

@@ -25,20 +25,24 @@ class NewsListPageController extends StateNotifier<NewsListPageState> {
 
 
   Future<void> getNews({@required SearchType searchType, CategoryListData category, String keyword})
-  async {//stateにview空のデータを格納
+  async {
+    //stateにview空のデータを格納
     state = state.copyWith(searchType: searchType, category: category, keyword: keyword, loading: true);
+    print('category:${state.category.nameJp}///keyword:${state.keyword}');
 
-    if (state.keyword != null){
-      print('カテゴリー:' + state.category.nameJp + 'キーワード'+state.keyword + state.searchType.toString());
-    }else{
-      print('ViewModel' + 'カテゴリー:' + state.category.nameJp + state.searchType.toString());
-    }
 
     //repositoryの関数にデータを格納
     List<Articles> _article = await newsRepository.getNews(searchType: state.searchType, category: state.category, keyword: state.keyword);
     state = state.copyWith(articles: _article);
+    print("記事${state.articles[0].title}");
 
     state = state.copyWith(loading: false);
 
+  }
+
+  @override
+  void dispose() {
+    newsRepository.dispose();
+    super.dispose();
   }
 }

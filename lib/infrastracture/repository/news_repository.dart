@@ -13,7 +13,7 @@ class NewsRepository {
       CategoryListData category,
       String keyword}) async {
     Response response;
-    List<Articles> result;
+    List<Articles> result = List<Articles>();
 
     try {
       switch (searchType) {
@@ -29,6 +29,7 @@ class NewsRepository {
       }
       if (response.isSuccessful) {
         final responseBody = response.body;
+        print("repositoryの$responseBody");
         result = News.fromJson(responseBody).articles;
       } else {
         final errorCode = response.statusCode;
@@ -41,4 +42,8 @@ class NewsRepository {
 
     return result;
   }
+
+  void dispose(){
+    _apiService.dispose();
+}
 }
