@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:practicehome/presentation/controller/head_line_controller.dart';
 import 'package:practicehome/presentation/controller/news_list_controller.dart';
 import 'package:practicehome/view/screen.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         StateNotifierProvider<NewsListPageController, NewsListPageState>(
           create: (context) => NewsListPageController(),
+        ),
+        StateNotifierProvider<HeadLineController, HeadLineState>(
+          create: (context) => HeadLineController(),
         )
       ],
       child: MaterialApp(
