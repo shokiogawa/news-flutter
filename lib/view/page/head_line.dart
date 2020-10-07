@@ -22,7 +22,9 @@ class HeadLine extends StatelessWidget {
             onRefresh(context);
           },
         ),
-        body: Padding(
+        body: state.loading ?
+        Center(child: CircularProgressIndicator())
+            :Padding(
           padding: const EdgeInsets.all(8.0),
           child: PageView.builder(
               controller: PageController(viewportFraction: 0.8),
@@ -38,13 +40,13 @@ class HeadLine extends StatelessWidget {
         ));
   }
 
-  void onRefresh(context) {
+  Future<void> onRefresh(context) async{
     final controller = Provider.of<HeadLineController>(context, listen: false);
     print("headlineの更新");
-    controller.getNews(searchType: SearchType.HEAD_LINE);
+    await controller.getNews(searchType: SearchType.HEAD_LINE);
   }
 
-  void _openArticleNewPage(BuildContext context, Articles articles) {
+  Future<void> _openArticleNewPage(BuildContext context, Articles articles) async{
     print(articles.url);
   }
 }
