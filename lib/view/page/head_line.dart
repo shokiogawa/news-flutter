@@ -3,6 +3,7 @@ import 'package:practicehome/data/search_type.dart';
 import 'package:practicehome/models/model/news_model.dart';
 import 'package:practicehome/presentation/controller/head_line_controller.dart';
 import 'package:practicehome/view/components/head_line_item.dart';
+import 'package:practicehome/view/screen/news_web_page_screen.dart';
 import 'package:provider/provider.dart';
 
 class HeadLine extends StatelessWidget {
@@ -47,6 +48,14 @@ class HeadLine extends StatelessWidget {
   }
 
   Future<void> _openArticleNewPage(BuildContext context, Articles articles) async{
+    Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => NewsWebPageScreen(
+              articles: articles,
+            )
+        )
+    );
     print(articles.url);
+
   }
 }

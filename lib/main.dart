@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:practicehome/presentation/controller/head_line_controller.dart';
 import 'package:practicehome/presentation/controller/news_list_controller.dart';
-import 'package:practicehome/view/screen.dart';
+import 'file:///C:/Users/syoki/AndroidStudioProjects/practicehome/lib/view/screen/screen.dart';
 import 'package:provider/provider.dart';
 import 'package:state_notifier/state_notifier.dart';
 
