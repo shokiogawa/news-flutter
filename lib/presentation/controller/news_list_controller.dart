@@ -8,6 +8,13 @@ import 'package:state_notifier/state_notifier.dart';
 
 part 'news_list_controller.freezed.dart';
 
+// class NewsFavorite extends Articles {
+//   final bool favorite;
+//   NewsFavorite({this.favorite: false, String title, String description, String url,
+//     String urlToImage, String publishedAt, String content})
+//       : super();
+// }
+
 @freezed
 abstract class NewsListPageState with _$NewsListPageState {
   factory NewsListPageState({
@@ -21,23 +28,35 @@ abstract class NewsListPageState with _$NewsListPageState {
 
 class NewsListPageController extends StateNotifier<NewsListPageState> {
   final NewsRepository newsRepository = NewsRepository();
-  NewsListPageController() : super(NewsListPageState(category: categories[0], searchType: SearchType.CATEGORY ,loading: false, articles: []));
 
+  NewsListPageController()
+      : super(NewsListPageState(
+            category: categories[0],
+            searchType: SearchType.CATEGORY,
+            loading: false,
+            articles: []));
 
-  Future<void> getNews({@required SearchType searchType, CategoryListData category, String keyword})
-  async {
+  Future<void> getNews(
+      {@required SearchType searchType,
+      CategoryListData category,
+      String keyword}) async {
     //stateにview空のデータを格納
-    state = state.copyWith(searchType: searchType, category: category, keyword: keyword, loading: true);
+    state = state.copyWith(
+        searchType: searchType,
+        category: category,
+        keyword: keyword,
+        loading: true);
     print('category:${state.category.nameJp}///keyword:${state.keyword}');
 
-
     //repositoryの関数にデータを格納
-    List<Articles> _article = await newsRepository.getNews(searchType: state.searchType, category: state.category, keyword: state.keyword);
+    List<Articles> _article = await newsRepository.getNews(
+        searchType: state.searchType,
+        category: state.category,
+        keyword: state.keyword);
     state = state.copyWith(articles: _article);
     print("記事${state.articles[0].title}");
 
     state = state.copyWith(loading: false);
-
   }
 
   @override

@@ -33,7 +33,8 @@ class NewDetailPage extends StatelessWidget {
                 ),),
               ),
               IconButton(icon: Icon(Icons.favorite, color: Colors.black, size: 40,),
-                  onPressed:(){} )
+                  onPressed:(){
+                  } )
             ],
           ),
         )
