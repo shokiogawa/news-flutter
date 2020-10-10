@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practicehome/models/model/news_model.dart';
+import 'package:practicehome/presentation/controller/new_detail_controller.dart';
 import 'package:practicehome/view/components/image_from_url.dart';
+import 'package:provider/provider.dart';
 
 class NewDetailPage extends StatelessWidget {
   final Articles articles;
@@ -34,6 +36,7 @@ class NewDetailPage extends StatelessWidget {
               ),
               IconButton(icon: Icon(Icons.favorite, color: Colors.black, size: 40,),
                   onPressed:(){
+                Provider.of<NewDetailController>(context, listen: false).changeFavorite();
                   } )
             ],
           ),

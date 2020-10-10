@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:practicehome/presentation/controller/head_line_controller.dart';
+import 'package:practicehome/presentation/controller/new_detail_controller.dart';
 import 'package:practicehome/presentation/controller/news_list_controller.dart';
 import 'file:///C:/Users/syoki/AndroidStudioProjects/practicehome/lib/view/screen/screen.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
         ),
         StateNotifierProvider<HeadLineController, HeadLineState>(
           create: (context) => HeadLineController(),
+        ),
+        StateNotifierProvider<NewDetailController, NewDetailState>(
+            create: (context)  => NewDetailController(),
         )
+
       ],
       child: MaterialApp(
         title: 'Practice_Frutter',

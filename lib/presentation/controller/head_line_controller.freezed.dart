@@ -15,15 +15,9 @@ class _$HeadLineStateTearOff {
 
 // ignore: unused_element
   _HeadLineState call(
-      {CategoryListData category,
-      SearchType searchType,
-      String keyword,
-      bool loading,
-      List<Articles> articles}) {
+      {SearchType searchType, bool loading, List<Articles> articles}) {
     return _HeadLineState(
-      category: category,
       searchType: searchType,
-      keyword: keyword,
       loading: loading,
       articles: articles,
     );
@@ -36,9 +30,7 @@ const $HeadLineState = _$HeadLineStateTearOff();
 
 /// @nodoc
 mixin _$HeadLineState {
-  CategoryListData get category;
   SearchType get searchType;
-  String get keyword;
   bool get loading;
   List<Articles> get articles;
 
@@ -50,12 +42,7 @@ abstract class $HeadLineStateCopyWith<$Res> {
   factory $HeadLineStateCopyWith(
           HeadLineState value, $Res Function(HeadLineState) then) =
       _$HeadLineStateCopyWithImpl<$Res>;
-  $Res call(
-      {CategoryListData category,
-      SearchType searchType,
-      String keyword,
-      bool loading,
-      List<Articles> articles});
+  $Res call({SearchType searchType, bool loading, List<Articles> articles});
 }
 
 /// @nodoc
@@ -69,18 +56,13 @@ class _$HeadLineStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object category = freezed,
     Object searchType = freezed,
-    Object keyword = freezed,
     Object loading = freezed,
     Object articles = freezed,
   }) {
     return _then(_value.copyWith(
-      category:
-          category == freezed ? _value.category : category as CategoryListData,
       searchType:
           searchType == freezed ? _value.searchType : searchType as SearchType,
-      keyword: keyword == freezed ? _value.keyword : keyword as String,
       loading: loading == freezed ? _value.loading : loading as bool,
       articles:
           articles == freezed ? _value.articles : articles as List<Articles>,
@@ -95,12 +77,7 @@ abstract class _$HeadLineStateCopyWith<$Res>
           _HeadLineState value, $Res Function(_HeadLineState) then) =
       __$HeadLineStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {CategoryListData category,
-      SearchType searchType,
-      String keyword,
-      bool loading,
-      List<Articles> articles});
+  $Res call({SearchType searchType, bool loading, List<Articles> articles});
 }
 
 /// @nodoc
@@ -116,18 +93,13 @@ class __$HeadLineStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object category = freezed,
     Object searchType = freezed,
-    Object keyword = freezed,
     Object loading = freezed,
     Object articles = freezed,
   }) {
     return _then(_HeadLineState(
-      category:
-          category == freezed ? _value.category : category as CategoryListData,
       searchType:
           searchType == freezed ? _value.searchType : searchType as SearchType,
-      keyword: keyword == freezed ? _value.keyword : keyword as String,
       loading: loading == freezed ? _value.loading : loading as bool,
       articles:
           articles == freezed ? _value.articles : articles as List<Articles>,
@@ -137,19 +109,10 @@ class __$HeadLineStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_HeadLineState implements _HeadLineState {
-  _$_HeadLineState(
-      {this.category,
-      this.searchType,
-      this.keyword,
-      this.loading,
-      this.articles});
+  _$_HeadLineState({this.searchType, this.loading, this.articles});
 
   @override
-  final CategoryListData category;
-  @override
   final SearchType searchType;
-  @override
-  final String keyword;
   @override
   final bool loading;
   @override
@@ -157,22 +120,16 @@ class _$_HeadLineState implements _HeadLineState {
 
   @override
   String toString() {
-    return 'HeadLineState(category: $category, searchType: $searchType, keyword: $keyword, loading: $loading, articles: $articles)';
+    return 'HeadLineState(searchType: $searchType, loading: $loading, articles: $articles)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HeadLineState &&
-            (identical(other.category, category) ||
-                const DeepCollectionEquality()
-                    .equals(other.category, category)) &&
             (identical(other.searchType, searchType) ||
                 const DeepCollectionEquality()
                     .equals(other.searchType, searchType)) &&
-            (identical(other.keyword, keyword) ||
-                const DeepCollectionEquality()
-                    .equals(other.keyword, keyword)) &&
             (identical(other.loading, loading) ||
                 const DeepCollectionEquality()
                     .equals(other.loading, loading)) &&
@@ -184,9 +141,7 @@ class _$_HeadLineState implements _HeadLineState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(searchType) ^
-      const DeepCollectionEquality().hash(keyword) ^
       const DeepCollectionEquality().hash(loading) ^
       const DeepCollectionEquality().hash(articles);
 
@@ -197,18 +152,12 @@ class _$_HeadLineState implements _HeadLineState {
 
 abstract class _HeadLineState implements HeadLineState {
   factory _HeadLineState(
-      {CategoryListData category,
-      SearchType searchType,
-      String keyword,
+      {SearchType searchType,
       bool loading,
       List<Articles> articles}) = _$_HeadLineState;
 
   @override
-  CategoryListData get category;
-  @override
   SearchType get searchType;
-  @override
-  String get keyword;
   @override
   bool get loading;
   @override
