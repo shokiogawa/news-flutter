@@ -5,6 +5,7 @@ import 'package:practicehome/presentation/controller/news_list_controller.dart';
 import 'package:practicehome/view/components/article_tile.dart';
 import 'package:practicehome/view/components/category_chips.dart';
 import 'package:practicehome/view/components/search.dart';
+import 'package:practicehome/view/page/new_detail_page.dart';
 import 'package:practicehome/view/screen/news_web_page_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,10 @@ class NewsList extends StatelessWidget {
                           itemBuilder: (context, int index) => ArticleTile(
                               articles: state.articles[index],
                               onArticle: (article) {
-                                _openArticleNewPage(article, context);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => NewDetailPage(article)
+                                ));
+                                // _openArticleNewPage(article , context);
                               }))),
             ],
           ),
@@ -87,14 +91,14 @@ class NewsList extends StatelessWidget {
         searchType: SearchType.CATEGORY, category: category);
   }
 
-  void _openArticleNewPage( article, BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => NewsWebPageScreen(
-          articles: article,
-        )
-      )
-    );
-    print(article.url);
-  }
+  // void _openArticleNewPage( article, BuildContext context) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => NewsWebPageScreen(
+  //         articles: article,
+  //       )
+  //     )
+  //   );
+  //   print(article.url);
+  // }
 }
