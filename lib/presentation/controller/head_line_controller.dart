@@ -21,17 +21,24 @@ class HeadLineController extends StateNotifier<HeadLineState>{
   NewsRepository _newsRepository = NewsRepository();
   HeadLineController() :super(HeadLineState( searchType: SearchType.CATEGORY, loading: false, articles: []));
 
+  @override
+  void dispose() {
+    _newsRepository.dispose();
+    super.dispose();
+  }
+
   Future<void> getNews({@required SearchType searchType}) async {
     state = state.copyWith(searchType: searchType);
     state = state.copyWith(loading: true);
-    print("head_line_controller//");
-
+    print("コントローラーのgetNewsメソッド");
+    print(state.loading);
     List<Articles> _articles =[];
 
     _articles = await _newsRepository.getNews(searchType: searchType);
     state = state.copyWith(articles: _articles);
 
     state = state.copyWith(loading: false);
-    print("_newsRepository");
+    print("repositoryからコントローラーに");
+    print(state.loading);
   }
 }

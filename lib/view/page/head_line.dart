@@ -12,7 +12,8 @@ class HeadLine extends StatelessWidget {
     final controller = Provider.of<HeadLineController>(context, listen: false);
     final state = Provider.of<HeadLineState>(context, listen: true);
     if (!state.loading && state.articles.isEmpty) {
-      print("head");
+      print("最初のbuild");
+      print(state.loading.toString());
       Future(() => controller.getNews(searchType: SearchType.HEAD_LINE));
     }
     return Scaffold(

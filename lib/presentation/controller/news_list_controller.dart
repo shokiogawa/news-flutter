@@ -36,6 +36,13 @@ class NewsListPageController extends StateNotifier<NewsListPageState> {
             loading: false,
             articles: []));
 
+  @override
+  void dispose() {
+    newsRepository.dispose();
+    super.dispose();
+  }
+
+
   Future<void> getNews(
       {@required SearchType searchType,
       CategoryListData category,
@@ -59,9 +66,5 @@ class NewsListPageController extends StateNotifier<NewsListPageState> {
     state = state.copyWith(loading: false);
   }
 
-  @override
-  void dispose() {
-    newsRepository.dispose();
-    super.dispose();
-  }
+
 }
