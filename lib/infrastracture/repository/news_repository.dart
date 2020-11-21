@@ -36,8 +36,11 @@ class NewsRepository {
       if (response.isSuccessful) {
         final responseBody = response.body;
         print("repositoryのgetNewsメソッド");
-        // result = News.fromJson(responseBody).articles;
-        result = await insertAndRecordFromDb(responseBody);
+        print(responseBody);
+        result = News.fromJson(responseBody).articles;
+        print("--------------------------------------------------------------------------");
+        print(result[1].title);
+        // result = await insertAndRecordFromDb(responseBody);
       } else {
         final errorCode = response.statusCode;
         final error = response.error;

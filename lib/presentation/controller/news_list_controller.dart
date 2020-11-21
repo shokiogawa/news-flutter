@@ -61,7 +61,7 @@ class NewsListPageController extends StateNotifier<NewsListPageState> {
         category: state.category,
         keyword: state.keyword);
     state = state.copyWith(articles: _article);
-    print("記事${state.articles[0].title}");
+    print("コントローラー記事:  ${state.articles[0].title}");
 
     state = state.copyWith(loading: false);
   }

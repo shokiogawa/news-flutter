@@ -10,7 +10,7 @@ class Screen extends StatefulWidget {
 
  class _ScreenState extends State<Screen> {
   int _currentIndex = 0;
-  final page = [HeadLine(), NewsList(), About()];
+  final page = [HeadLine(), NewsList(), TabPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class Screen extends StatefulWidget {
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.info),
-            title: const Text('このアプリについて')
+            title: const Text('タブページ')
           )
         ],
         onTap: (index){
